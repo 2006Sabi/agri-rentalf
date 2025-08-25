@@ -38,6 +38,54 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const forgotPassword = async (email) => {
+    try {
+      const response = await axios.post("/api/auth/forgot-password", { email });
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        error: error.response?.data?.message || "Password reset request failed",
+      };
+    }
+  };
+
+  const resetPassword = async (token, password) => {
+    try {
+      const response = await axios.post("/api/auth/reset-password", { token, password });
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        error: error.response?.data?.message || "Password reset failed",
+      };
+    }
+  };
+
+  const verifyEmail = async (token) => {
+    try {
+      const response = await axios.get(`/api/auth/verify-email?token=${token}`);
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        error: error.response?.data?.message || "Email verification failed",
+      };
+    }
+  };
+
+  const resendVerification = async () => {
+    try {
+      const response = await axios.post("/api/auth/resend-verification");
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        error: error.response?.data?.message || "Resend verification failed",
+      };
+    }
+  };
+
   const login = async (email, password) => {
     try {
       const response = await axios.post("/api/auth/login", { email, password });
@@ -85,6 +133,10 @@ export const AuthProvider = ({ children }) => {
     login,
     register,
     logout,
+    forgotPassword,
+    resetPassword,
+    verifyEmail,
+    resendVerification,
     loading,
   };
 
