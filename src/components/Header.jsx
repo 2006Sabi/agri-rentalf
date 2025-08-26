@@ -78,19 +78,15 @@ const Header = () => {
               Forum
             </Link>
 
-            {user && (
-              <Link
-                to="/ai-crop-planner"
-                className={`nav-link ${
-                  isActive("/ai-crop-planner") ? "active" : ""
-                }`}
-                onClick={() => setShowMobileMenu(false)}
-              >
-                AI Crop Planner
-              </Link>
-            )}
-
-
+            <Link
+              to="/ai-crop-planner"
+              className={`nav-link ${
+                isActive("/ai-crop-planner") ? "active" : ""
+              }`}
+              onClick={() => setShowMobileMenu(false)}
+            >
+              AI Crop Planner
+            </Link>
 
             {user ? (
               <div className="user-menu">

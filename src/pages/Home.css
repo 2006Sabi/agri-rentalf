@@ -1,0 +1,46 @@
+/* Home.css styles */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero video {
+  width: 100%;
+  height: auto;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
+}
+
+.stat {
+  text-align: center;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.section-subtitle {
+  font-size: 16px;
+  color: #64748b;
+  margin-bottom: 40px;
+}
