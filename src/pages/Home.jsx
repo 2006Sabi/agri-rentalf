@@ -94,9 +94,6 @@ const Home = () => {
             <Link to="/equipment" className="btn btn-primary">
               Browse Equipment
             </Link>
-            <Link to="/register" className="btn btn-outline">
-              Join Our Community
-            </Link>
           </div>
         </div>
       </section>

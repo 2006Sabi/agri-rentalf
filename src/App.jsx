@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext";
 
 // Components
@@ -22,6 +22,7 @@ import Products from "./pages/Products";
 import AdminDashboard from "./pages/AdminDashboard";
 import Profile from "./pages/Profile";
 import Bookings from "./pages/Bookings";
+import LandingPage from "./pages/LandingPage";
 
 import CropPlanner from "./pages/CropPlanner";
 import AICropPlanner from "./pages/AICropPlanner";
@@ -50,111 +51,270 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/verify-email" element={<VerifyEmail />} />
-          <Route path="/resend-verification" element={<ResendVerification />} />
-          <Route path="/equipment" element={<Equipment />} />
-          <Route path="/add-equipment" element={<EquipmentForm />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/knowledge-hub" element={<KnowledgeHub />} />
-          <Route path="/crop-marketplace" element={<CropMarketplace />} />
-          <Route path="/crop/:id" element={<CropDetail />} />
-          <Route path="/forum" element={<Forum />} />
-          <Route path="/forum/post/:id" element={<ForumPost />} />
-          <Route path="/forum/new" element={<NewForumPost />} />
+      <Routes>
+        {/* Public routes */}
+        <Route path="/" element={
+          <>
+            <main>
+              <LandingPage />
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        
+        {/* Auth routes - redirect to home if already authenticated */}
+        <Route path="/login" element={
+          user ? <Navigate to="/home" replace /> : <Login />
+        } />
+        <Route path="/register" element={
+          user ? <Navigate to="/home" replace /> : <Register />
+        } />
+        <Route path="/forgot-password" element={
+          user ? <Navigate to="/home" replace /> : <ForgotPassword />
+        } />
+        <Route path="/reset-password" element={
+          user ? <Navigate to="/home" replace /> : <ResetPassword />
+        } />
+        <Route path="/verify-email" element={
+          user ? <Navigate to="/home" replace /> : <VerifyEmail />
+        } />
+        <Route path="/resend-verification" element={
+          user ? <Navigate to="/home" replace /> : <ResendVerification />
+        } />
 
-          <Route
-            path="/admin"
-            element={
+        {/* Application routes with header */}
+        <Route path="/home" element={
+          <>
+            <Header />
+            <main>
+              <Home />
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/equipment" element={
+          <>
+            <Header />
+            <main>
+              <Equipment />
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/add-equipment" element={
+          <>
+            <Header />
+            <main>
+              <EquipmentForm />
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/products" element={
+          <>
+            <Header />
+            <main>
+              <Products />
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/knowledge-hub" element={
+          <>
+            <Header />
+            <main>
+              <KnowledgeHub />
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/crop-marketplace" element={
+          <>
+            <Header />
+            <main>
+              <CropMarketplace />
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/crop/:id" element={
+          <>
+            <Header />
+            <main>
+              <CropDetail />
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/forum" element={
+          <>
+            <Header />
+            <main>
+              <Forum />
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/forum/post/:id" element={
+          <>
+            <Header />
+            <main>
+              <ForumPost />
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/forum/new" element={
+          <>
+            <Header />
+            <main>
+              <NewForumPost />
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+
+        {/* Protected routes */}
+        <Route path="/admin" element={
+          <>
+            <Header />
+            <main>
               <ProtectedRoute adminOnly>
                 <AdminDashboard />
               </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/profile"
-            element={
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/profile" element={
+          <>
+            <Header />
+            <main>
               <ProtectedRoute>
                 <Profile />
               </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/bookings"
-            element={
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/bookings" element={
+          <>
+            <Header />
+            <main>
               <ProtectedRoute>
                 <Bookings />
               </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/crop-planner"
-            element={
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/crop-planner" element={
+          <>
+            <Header />
+            <main>
               <ProtectedRoute>
                 <CropPlanner />
               </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/ai-crop-planner"
-            element={
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/ai-crop-planner" element={
+          <>
+            <Header />
+            <main>
               <ProtectedRoute>
                 <AICropPlanner />
               </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/disease-detection"
-            element={
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/disease-detection" element={
+          <>
+            <Header />
+            <main>
               <ProtectedRoute>
                 <DiseaseDetection />
               </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/sell-crop"
-            element={
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/sell-crop" element={
+          <>
+            <Header />
+            <main>
               <ProtectedRoute>
                 <SellCrop />
               </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/my-crops"
-            element={
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/my-crops" element={
+          <>
+            <Header />
+            <main>
               <ProtectedRoute>
                 <MyCrops />
               </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/my-orders"
-            element={
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+        <Route path="/my-orders" element={
+          <>
+            <Header />
+            <main>
               <ProtectedRoute>
                 <MyOrders />
               </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </main>
-      <Footer />
-      <ChatBot />
-      <DiseaseDetectionLogo />
+            </main>
+            <Footer />
+            <ChatBot />
+            <DiseaseDetectionLogo />
+          </>
+        } />
+      </Routes>
     </div>
   );
 }
